@@ -4,10 +4,8 @@ import br.edu.uea.cliente.Cliente;
 import br.edu.uea.transacao.Transacao;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class ContaCorrente {
-	static Scanner input = new Scanner(System.in);
 	private float saldo;
 	private String numeroConta;
 	private String numeroAgencia;
@@ -23,8 +21,8 @@ public class ContaCorrente {
 
 	public void depositar(float v) {
 		saldo += v;
-		Transacao t1 = new Transacao("deposito", v, "00:00");
-		registrarTransacao(t1);
+		Transacao t = new Transacao("Deposito", v, "00:00");
+		registrarTransacao(t);
 	}
 	
 	public boolean sacar(float v) {
@@ -35,8 +33,8 @@ public class ContaCorrente {
 			return false;
 		}
 		else {
-		Transacao t2 = new Transacao("saque", v, "00:01");
-		registrarTransacao(t2);
+		Transacao t = new Transacao("Saque", v, "00:01");
+		registrarTransacao(t);
 		return true;
 		}
 	}
@@ -53,7 +51,7 @@ public class ContaCorrente {
 	public void ImprimirExtrato() {
 		if(transacoes.size() > 0) {
 			for (int i = 0; i < transacoes.size(); i++) {
-				System.out.println("Operacao: " + transacoes.get(i).getOperacao() 
+				System.out.println("Operacao " + (i+1) + ": " + transacoes.get(i).getOperacao() 
 				+ "\nValor movimentado: " + transacoes.get(i).getValor()
 				+ "\nHorario da transacao: " + transacoes.get(i).getDataHora());
 				System.out.println("-------------");
