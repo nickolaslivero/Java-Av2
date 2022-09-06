@@ -4,6 +4,7 @@ import br.edu.uea.cliente.Cliente;
 import br.edu.uea.transacao.Transacao;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.swing.JOptionPane;
 
@@ -12,6 +13,7 @@ public class ContaCorrente {
 	private String numeroConta;
 	private String numeroAgencia;
 	private static ArrayList<Transacao> transacoes;
+	Date data = new Date();
 	
 	public ContaCorrente(float _saldo, String _numeroConta, String _numeroAgencia, Cliente _cliente) {
 		transacoes = new ArrayList<Transacao>();
@@ -23,7 +25,7 @@ public class ContaCorrente {
 
 	public void depositar(float v) {
 		saldo += v;
-		Transacao t = new Transacao("Deposito", v, "00:00");
+		Transacao t = new Transacao("Deposito", v, data);
 		registrarTransacao(t);
 	}
 	
@@ -32,12 +34,12 @@ public class ContaCorrente {
 		if (saldo < 0.0f) {
 			saldo += v;
 			JOptionPane.showMessageDialog(null, "Saldo negativo, operacao falhou.");
-			Transacao t = new Transacao("FALHOU", v, "00:01");
+			Transacao t = new Transacao("FALHOU", v, data);
 			registrarTransacao(t);
 			return false;
 		}
 		else {
-		Transacao t = new Transacao("Saque", v, "00:01");
+		Transacao t = new Transacao("Saque", v, data);
 		registrarTransacao(t);
 		return true;
 		}
@@ -57,7 +59,7 @@ public class ContaCorrente {
 			for (int i = 0; i < transacoes.size(); i++) {
 				String aux = "\nTipo de Operacao " + (i+1) + ": " + transacoes.get(i).getOperacao() 
 						+ "\nValor: " + transacoes.get(i).getValor()
-						+ "\nHorario da transacao: " + transacoes.get(i).getDataHora()
+						+ "\nHorario: " + transacoes.get(i).getDataHora()
 						+ "\n----------------------------";
 				ExtratoTotal = ExtratoTotal.concat(aux);
 				}

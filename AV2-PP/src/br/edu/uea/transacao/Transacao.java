@@ -1,11 +1,13 @@
 package br.edu.uea.transacao;
 
+import java.util.Date;
+
 public class Transacao {
 	private String operacao;
 	private float valor;
-	private String dataHora;
+	private Date dataHora;
 	
-	public Transacao(String _operacao, float _valor, String _dataHora) {
+	public Transacao(String _operacao, float _valor, Date _dataHora) {
 		this.operacao = _operacao;
 		this.valor = _valor;
 		this.dataHora = _dataHora;
@@ -27,11 +29,11 @@ public class Transacao {
 		this.valor = valor;
 	}
 
-	public String getDataHora() {
+	public Date getDataHora() {
 		return dataHora;
 	}
 
-	public void setDataHora(String dataHora) {
+	public void setDataHora(Date dataHora) {
 		this.dataHora = dataHora;
 	}
 	
