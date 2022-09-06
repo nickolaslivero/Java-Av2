@@ -5,6 +5,8 @@ import br.edu.uea.transacao.Transacao;
 
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 public class ContaCorrente {
 	private float saldo;
 	private String numeroConta;
@@ -29,7 +31,9 @@ public class ContaCorrente {
 		saldo -= v;
 		if (saldo < 0.0f) {
 			saldo += v;
-			System.out.println("Saldo negativo, operacao falhou.");
+			JOptionPane.showMessageDialog(null, "Saldo negativo, operacao falhou.");
+			Transacao t = new Transacao("FALHOU", v, "00:01");
+			registrarTransacao(t);
 			return false;
 		}
 		else {
@@ -41,24 +45,26 @@ public class ContaCorrente {
 	
 	public static void registrarTransacao(Transacao t) {
 		transacoes.add(t);
-		System.out.println("Transacao feita com sucesso!");
 	}
 	
 	public ArrayList<Transacao> getExtrato() {
-			return transacoes;
+		return transacoes;
 	}
 	
 	public void ImprimirExtrato() {
+		String ExtratoTotal = "EXTRATO TOTAL:\n----------------------------";
 		if(transacoes.size() > 0) {
 			for (int i = 0; i < transacoes.size(); i++) {
-				System.out.println("Operacao " + (i+1) + ": " + transacoes.get(i).getOperacao() 
-				+ "\nValor movimentado: " + transacoes.get(i).getValor()
-				+ "\nHorario da transacao: " + transacoes.get(i).getDataHora());
-				System.out.println("-------------");
+				String aux = "\nTipo de Operacao " + (i+1) + ": " + transacoes.get(i).getOperacao() 
+						+ "\nValor: " + transacoes.get(i).getValor()
+						+ "\nHorario da transacao: " + transacoes.get(i).getDataHora()
+						+ "\n----------------------------";
+				ExtratoTotal = ExtratoTotal.concat(aux);
 				}
+			JOptionPane.showMessageDialog(null, ExtratoTotal);
         }
 		else {
-            System.out.println("Nao há transacoes cadastradas");
+			JOptionPane.showMessageDialog(null, "Nao há transacoes cadastradas");
         }
 	}
 
