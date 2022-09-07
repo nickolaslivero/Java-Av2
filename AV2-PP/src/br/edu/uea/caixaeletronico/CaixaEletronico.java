@@ -3,12 +3,12 @@ package br.edu.uea.caixaeletronico;
 import javax.swing.JOptionPane;
 
 import br.edu.uea.cliente.Cliente;
-import br.edu.uea.contacorrente.*;
+import br.edu.uea.contacorrente.ContaCorrente;
 
 public class CaixaEletronico {
 	public static void main(String[] args) {
 		
-		int cadastrarsn = JOptionPane.showConfirmDialog(null, "Deseja cadastrar uma conta?", "Cadastrar conta",
+		int cadastrarsn = JOptionPane.showConfirmDialog(null, "Bem vindo(a) a central do Banco.\nDeseja cadastrar uma conta?", "Cadastrar conta",
 			JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
 		
 		if (cadastrarsn == 0) {
@@ -17,9 +17,11 @@ public class CaixaEletronico {
 			String CPF = JOptionPane.showInputDialog("Digite seu CPF");
 			String Endereco = JOptionPane.showInputDialog("Digite seu Endereco");
 			
-			Cliente cliente = new Cliente(nome, RG, CPF, Endereco);
+			Cliente cliente = new Cliente(nome, RG, CPF, Endereco); //Agregaçao: classe "maior"
 			
-			ContaCorrente conta = new ContaCorrente (0.0f, "00000000-1", "0001", cliente);
+			String numeroConta = ContaCorrente.gerarNumeroConta();
+			
+			ContaCorrente conta = new ContaCorrente (numeroConta, "0001", cliente); //Agregacao: classe "menor" - Um cliente pode ter várias contas.
 			
 			if (conta != null && cliente.getNome() != null && cliente.getRg() != null && cliente.getCpf() != null && cliente.getEndereco() != null ) {
 				JOptionPane.showMessageDialog(null, "Voce criou sua conta com sucesso!"
@@ -44,14 +46,14 @@ public class CaixaEletronico {
 								String valorstring= JOptionPane.showInputDialog("Digite o valor a ser depositado: ");
 								if (valorstring != null) {
 									float valor = Float.parseFloat(valorstring);
-									conta.depositar(valor);
+									conta.depositar(valor, conta);
 								}
 							} 
 							else if (transacaostring.equals("S")||transacaostring.equals("s")) {
 								String valorstring= JOptionPane.showInputDialog("Digite o valor a ser sacado: ");
 								if (valorstring != null) {
 									float valor = Float.parseFloat(valorstring);
-									conta.sacar(valor);
+									conta.sacar(valor, conta);
 								}
 							}
 							else {
