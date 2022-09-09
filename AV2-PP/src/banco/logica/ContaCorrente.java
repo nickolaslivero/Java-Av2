@@ -140,7 +140,7 @@ public class ContaCorrente {
 	}
 	
 	public static void imprimirContas() {
-		String InformacoesTotais = "Contas Cadastradas:\n----------------------------";
+		String InformacoesTotais = "Contas Cadastradas: "+contas.size() +"\n----------------------------";
 		if(contas.size() > 0) {
 			for (int i = 0; i < contas.size(); i++) {
 				String aux1 = 

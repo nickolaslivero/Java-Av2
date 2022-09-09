@@ -39,10 +39,12 @@ public class CaixaEletronico {
 						JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
 					if (transacaosn == 0) {
 						do {
-							String transacaostring = JOptionPane.showInputDialog("Depositar ou sacar? Saldo: "+ conta.getSaldo() + "\nDigite 'D' OU 'S'. ");
+							String transacaostring = JOptionPane.showInputDialog("SELECIONE A OPERACAO DESEJADA.\n"
+								+ "Depositar ou sacar? Saldo: "+ conta.getSaldo() + "\nDigite APENAS 'D' OU 'S'.\n"
+								+ "Aperte em 'Cancel' para imprimir extrato.");
 							if (transacaostring != null) {
 								if (transacaostring.equals("D")||transacaostring.equals("d")) {
-									String valorstring= JOptionPane.showInputDialog("Digite o valor a ser depositado: ");
+									String valorstring= JOptionPane.showInputDialog("Digite um VALOR a ser DEPOSITADO: ");
 									if (valorstring != null) {
 										try {
 											float valor = Float.parseFloat(valorstring);
@@ -54,7 +56,7 @@ public class CaixaEletronico {
 									}
 								} 
 								else if (transacaostring.equals("S")||transacaostring.equals("s")) {
-									String valorstring= JOptionPane.showInputDialog("Digite o valor a ser sacado: ");
+									String valorstring= JOptionPane.showInputDialog("Digite um VALOR a ser SACADO: ");
 									if (valorstring != null) {
 										try {
 											float valor = Float.parseFloat(valorstring);
@@ -80,7 +82,7 @@ public class CaixaEletronico {
 						conta.ImprimirExtrato();
 					}
 					
-					JOptionPane.showMessageDialog(null, "Informacões totais:"
+					JOptionPane.showMessageDialog(null, "INFORMACOES TOTAIS:"
 					+ "\n-----DADOS DO TITULAR:-----"
 					+ "\nNome do Titular: " + cliente.getNome()
 					+ "\nRG: " + cliente.getRg()
@@ -94,8 +96,6 @@ public class CaixaEletronico {
 					+"\n------------------------------");
 			
 					ContaCorrente.salvarContaCorrente(conta);
-					
-					JOptionPane.showMessageDialog(null, "Obrigado pela preferencia!");
 				}
 				else {
 					JOptionPane.showMessageDialog(null, "Conta invalida.");
