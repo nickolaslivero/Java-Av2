@@ -9,14 +9,16 @@ import banco.dados.BancoDados;
 import javax.swing.JOptionPane;
 
 public class ContaCorrente {
+	// declarar atributos.
 	private float saldo;
 	private String numeroConta;
-	private String numeroAgencia;
+	private String numeroAgencia; 
 	private ArrayList<Transacao> transacoes = new ArrayList<Transacao>(); //Composicao: classe "menor" Transacao e classe "maior" ContaCorrente.
-	private Cliente cliente; //Agregacao: classe "menor" ContaCorrente e classe "maior" Cliente
+	private Cliente cliente; //Agregacao: classe "menor" ContaCorrente e classe "maior" Cliente.
 	private static ArrayList<ContaCorrente> contas = new ArrayList<ContaCorrente>();
 	
 	public ContaCorrente(Cliente _cliente) {
+		// construtor com parametro do tipo Cliente.
 		this.numeroConta = gerarNumeroConta();
 		this.numeroAgencia = gerarNumeroAgencia();
 		setSaldo(0.0f);
@@ -24,6 +26,7 @@ public class ContaCorrente {
 	}
 
 	public void depositar(float v, ContaCorrente contacorrente) {
+		// metodo depositar.
 		saldo += v;
 		Date data = new Date();
 		Transacao t = new Transacao("Deposito", v, data, contacorrente);
@@ -31,6 +34,7 @@ public class ContaCorrente {
 	}
 	
 	public boolean sacar(float v, ContaCorrente contacorrente) {
+		// metodo sacar.
 		saldo -= v;
 		if (saldo < 0.0f) {
 			saldo += v;
@@ -49,6 +53,7 @@ public class ContaCorrente {
 	}
 	
 	public void registrarTransacao(Transacao t) {
+		// registra a transaçao.
 		transacoes.add(t);
 	}
 	
@@ -61,6 +66,7 @@ public class ContaCorrente {
 	}
 	
 	public void ImprimirExtrato() {
+		// Concatena a informacao de todos os extratos para o usuario.
 		String ExtratoTotal = "EXTRATO TOTAL:\n----------------------------";
 		if(transacoes.size() > 0) {
 			for (int i = 0; i < transacoes.size(); i++) {
@@ -78,6 +84,7 @@ public class ContaCorrente {
 	}
 	
 	public String gerarNumeroConta() {
+		// Gerar um numero aleatório para conta do usuario.
 		int auxint1 = (int)(Math.random()*10000000);
 		String auxstr1 = String.valueOf(auxint1);
 		DecimalFormat formatter = new DecimalFormat("#00000000");
@@ -91,6 +98,7 @@ public class ContaCorrente {
 	}
 	
 	public String gerarNumeroAgencia() {
+		// Gerar um numero aleatorio para agencia.
 		int auxint1 = (int)(Math.random()*1000);
 		String numeroAgenciaRand = String.valueOf(auxint1);
 		DecimalFormat formatter = new DecimalFormat("#0000");
@@ -107,6 +115,7 @@ public class ContaCorrente {
 	}
 	
 	public String getSaldo() {
+		// metodo get que transforma o saldo em uma String formatada.
 	    DecimalFormat formatter = new DecimalFormat("R$ #0.00");
 	    return formatter.format(saldo);
 	}
@@ -140,6 +149,7 @@ public class ContaCorrente {
 	}
 	
 	public static void imprimirContas() {
+		// metodo que concatena informacoes sobre todas as contas cadastradas.
 		String InformacoesTotais = "Contas Cadastradas: "+contas.size() +"\n----------------------------";
 		if(contas.size() > 0) {
 			for (int i = 0; i < contas.size(); i++) {

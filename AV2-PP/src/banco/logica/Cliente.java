@@ -1,18 +1,20 @@
 package banco.logica;
 
 public class Cliente {
+	// declarar atributos.
 	private String nome;
 	private String rg;
 	private String cpf;
 	private String endereco;
 	
 	public Cliente(String _nome,String _rg, String _cpf, String _endereco) {
+		// metodo construtor com parametros.
 		this.nome = _nome;
 		this.rg = _rg;
 		this.cpf = _cpf;
 		this.endereco = _endereco;
 	}
-	
+	// getters e setters.
 	public String getNome() {
 		return nome;
 	}
