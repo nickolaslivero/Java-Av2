@@ -166,4 +166,9 @@ public class ContaCorrente {
 			JOptionPane.showMessageDialog(null, "Nao há transacoes cadastradas");
         }
 	}
+
+	public boolean verificarSenha(String senha) {
+	       String senhaCorreta = "1234";
+	        return senha.equals(senhaCorreta);
+	    }
 }
